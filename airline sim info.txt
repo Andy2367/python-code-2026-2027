@@ -1,0 +1,39 @@
+﻿Information
+
+
+If you wish to see this information at any time just input (input) and it will bring up this text.
+
+
+Short haul aircraft:
+        
+        A short haul aircraft will give you 20 credits per short haul aircraft you have minus any that are in maintenance every time you go through.
+
+
+There is a 20% chance that a short haul aircraft will be in maintenance.
+
+
+Short haul aircraft start a 50 credits and increment by x 1.5 every time you buy one
+
+
+Medium haul aircraft:
+
+
+        A medium haul aircraft will give you 35 credits per short haul aircraft you have minus any that are in maintenance every time you go through.
+
+
+There is a 30% chance that a short hall aircraft will be in maintenance.
+
+
+Short haul aircraft start a 100 credits and increment by x 1.5 every time you buy one
+
+
+Long haul aircraft:
+
+
+        A long haul aircraft will give you 50 credits per short haul aircraft you have minus any that are in maintenance every time you go through.
+
+
+There is a 40% chance that a long haul aircraft will be in maintenance.
+
+
+Short haul aircraft start a 50 credits and increment by x 1.5 every time you buy one

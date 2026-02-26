@@ -1,0 +1,8 @@
+John Doe,35,Yes
+Jane Smith,22,No
+Peter Jones,51,Yes
+Maria Garcia,42,Yes
+David Lee,19,No
+Sarah Chen,28,Yes
+Robert Brown,65,No
+Emily Davis,30,Yes
