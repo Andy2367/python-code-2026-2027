@@ -1,0 +1,131 @@
+import time
+import webbrowser
+
+class SongNode:
+    def __init__(self, title, artist, Link):
+        self.title = title
+        self.artist = artist
+        self.link = Link
+        self.prev = None
+        self.next = None
+
+class playlist:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.current = None
+    def add_song(self,title, artist, Link):
+        node = SongNode(title, artist, Link)
+        if not self.head:
+            self.head = self.tail = self.current = node
+        else:
+            node.prev = self.tail
+            self.tail.next = node
+            self.tail = node
+    def show_current(self):
+        if self.current:
+            print(f"now playing {self.current.title} - {self.current.artist}")
+            webbrowser.open (self.current.link)
+    def next_track(self):
+        if self.current and self.current.next:
+            self.current = self.current.next
+    def prev_track(self):
+        if self.current and self.current.prev:
+            self.current = self.current.prev
+
+    def deleteNode(self, dele):
+        
+        # Base Case
+        if self.head is None or dele is None:
+            return 
+        
+        # If node to be deleted is head node
+        if self.head == dele:
+            self.head = dele.next
+
+        # Change next only if node to be 
+        # deleted is NOT the last node
+        if dele.next is not None:
+            dele.next.prev = dele.prev
+    
+        # Change prev only if node to be 
+        # deleted is NOT the first node
+        if dele.prev is not None:
+            dele.prev.next = dele.next
+
+    def incert(self, title, artist, Link, tar)
+        node = SongNode(title, artist, Link)
+        #J
+
+        temp = self.head
+        c=0
+        while(c<tar):
+            c=c+1
+            temp=temp.next
+        #A-B-C-D-E-F-G      
+        #Insert J after C
+        #A-B-C-J-D-E-F-G
+        #after while loop points to C
+        #C.next = J
+        
+        
+        nextNode = temp.next    # This is D for later use
+        temp.next = node    #link the newly creaeted node where you want it.
+        
+        #J.prev = C
+        node.prev=temp
+
+        #J.next = D
+        node.next = nextNode
+
+        #D.prev = J
+        nextNode.prev = node 
+'''
+        temp.next = self.current
+        self.current.prev = temp    
+   '''     
+
+my_vibe = playlist()
+
+def add():
+    name = input("what is the name of the song that you want to add? e.g. Bastile Day: ")
+    artist = input(f"Who is {name} by? e.g. Rush: ")
+    link = input(f"pleas add the link to {name} by {artist}: ")
+    my_vibe.add_song(name,artist,link)
+    print("loading...")
+    print()
+    time.sleep(1)
+    print(f"{name} by {artist} sucesfully added to your playlist")
+def ins():
+    name = input("what is the name of the song that you want to add? e.g. Bastile Day: ")
+    artist = input(f"Who is {name} by? e.g. Rush: ")
+    link = input(f"pleas add the link to {name} by {artist}: ")
+    tar = input("where do you want to incert the song? e.g. 4 which would make the song the 4th in the playlist: ")
+    my_vibe.incert(name, artist, link, tar)
+
+
+def menu():
+    print("what would you like to do? ")
+    print()
+    print("1. add a song")
+    print("2. play your song")
+    print("3. skip to your next song")
+    print("4. go back to the previous song")
+    print("5. delete song: ")
+    
+    inp = input().strip()
+    if inp == "1":
+        add()
+    elif inp == "2":
+        my_vibe.show_current()
+    elif inp == "3":
+        my_vibe.next_track()
+    elif inp == "4":
+        my_vibe.prev_track()
+    elif inp == "5":
+        my_vibe.deleteNode()
+    elif inp == "6":
+        my_vibe.incert()
+
+while True:
+    menu()
