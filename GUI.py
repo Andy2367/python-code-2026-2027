@@ -10,8 +10,7 @@ def select_all(table, cur):
 def example_data(cur):
     cur.execute("""
     INSERT INTO Events (Event_name, Event_type, Location, Time, More_info)
-    VALUES ("Glenco Black", 1, 1, "09-10-26", "www.example.com")
-    """)
+    VALUES (?, ?, ?, ?, ?)""", ("Glenco Black", 1, 1, "09-10-26", "www.example.com"))
 
 # connect to database or crerate one if it does not exist
 connection = sqlite3.connect("IA_database.db")
@@ -48,12 +47,25 @@ example_data(cur)
 connection.commit()
 
 def update_status():
-    cur.execute('''
-UPDATE Events
-SET Selected=1
-WHERE Event_id = 2
-''')
-connection.commit()
+    conn = sqlite3.connect("IA_database.db")
+    cur = conn.cursor()
+    cur.execute("SELECT Selected FROM Events WHERE Event_id IS 1")
+    print(cur.fetchall())
+    cur.execute("SELECT Selected FROM Events WHERE Event_id IS 1")
+    status = cur.fetchone()
+    print(status)
+    if status[0] == 1:
+        cur.execute("UPDATE Events SET Selected = 0")
+        conn.commit()
+        print("condition 1")
+    elif status[0] == 0:
+        cur.execute("UPDATE Events SET Selected = 1")
+        conn.commit()
+        print("condition 2")
+    else:
+        print("condition 3")
+    cur.execute("SELECT Selected FROM Events WHERE Event_id IS 1")
+    print(cur.fetchall())
 
 cur.execute("SELECT selected FROM Events WHERE Event_id = 2")
 cur.fetchall()
@@ -66,3 +78,5 @@ main.geometry("500x500")
 tk.Button(text=status, command=update_status).pack()
 tk.Label(text=status).pack()
 main.mainloop()
+
+update_status()
