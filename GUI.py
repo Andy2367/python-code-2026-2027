@@ -57,26 +57,33 @@ def update_status():
     if status[0] == 1:
         cur.execute("UPDATE Events SET Selected = 0")
         conn.commit()
+        select.config(bg="red")
         print("condition 1")
     elif status[0] == 0:
         cur.execute("UPDATE Events SET Selected = 1")
         conn.commit()
+        select.config(bg="blue")
         print("condition 2")
     else:
         print("condition 3")
     cur.execute("SELECT Selected FROM Events WHERE Event_id IS 1")
     print(cur.fetchall())
 
-cur.execute("SELECT selected FROM Events WHERE Event_id = 2")
+cur.execute("SELECT selected FROM Events WHERE Event_id = 1")
 cur.fetchall()
 
-cur.execute("SELECT selected FROM Events WHERE Event_id = 2")
-status = cur.fetchall()
+cur.execute("SELECT selected FROM Events WHERE Event_id = 1")
+status = cur.fetchone()
 
 main = tk.Tk()
 main.geometry("500x500")
-tk.Button(text=status, command=update_status).pack()
+if status[0] == 0:
+    select = tk.Button(text=status, command=update_status, bg="red")
+    select.pack(pady=10)
+elif status[0] == 1:
+    select = tk.Button(text=status, command=update_status, bg="blue")
+    select.pack(pady=10)
+    print("error")
+
 tk.Label(text=status).pack()
 main.mainloop()
-
-update_status()
