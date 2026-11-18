@@ -119,7 +119,7 @@ class event:
             elif status == 1:
                 bg = "blue"
             
-            btn = tk.Button(frame,height=2, width=70, text=f"{name} {e_type}, in {loc}, at {time}, on {date}, get more info at {info}",bg=bg, command= lambda: self.update_status(ID))
+            btn = tk.Button(frame, height=2, width=70,text=f"{name} {e_type}, in {loc}, at {time}, on {date}, get more info at {info}",bg=bg,command= lambda: self.update_status(ID))
             self.btns[ID] = btn
             btn.pack(padx=5, pady=5)
 
@@ -227,11 +227,11 @@ class event:
             elif till_m == 10:
                 toast(f"{name} starts in 10 minutes", on_click=self.more_info)
 
-# connect to database or crerate one if it does not exist
+# connect to database or create one if it does not exist
 conn = sqlite3.connect("IA_database.db")
 cur = conn.cursor()
 
-# create all requierd tables if they don't exist
+# create all required tables if they don't exist
 
 c1 = """CREATE TABLE IF NOT EXISTS
 Events(Event_id INTEGER PRIMARY KEY,
