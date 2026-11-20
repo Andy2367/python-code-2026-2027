@@ -64,25 +64,25 @@ class event:
 
 
     def update_status(self, ID):
-        conn = sqlite3.connect("IA_database.db")
+        conn = sqlite3.connect("IA_database.db") # db connection
         cur = conn.cursor()
-        status = self.get_ststus(ID)
+        status = self.get_ststus(ID) # selected for each event
         if status == 0:
             print()
-            print(self.get_ststus(ID))
-            cur.execute("UPDATE Events SET Selected = 1 WHERE Event_id = ?"(ID))
-            conn.commit()
-            print(self.get_ststus(ID))
+            print(self.get_ststus(ID)) # for testing
+            cur.execute("UPDATE Events SET Selected = 1 WHERE Event_id = ?"(ID)) # updates selected in db
+            conn.commit() # saves db
+            print(self.get_ststus(ID)) # for testing
             print()
-            self.btns[ID].config(bg="blue")
+            self.btns[ID].config(bg="blue") # pdates button colour
         elif status == 1:
             print()
-            print(self.get_ststus(ID))
-            cur.execute("UPDATE Events SET Selected = 0 WHERE Event_id = ?"(ID))
-            conn.commit()
-            print(self.get_ststus(ID))
+            print(self.get_ststus(ID)) # for testing
+            cur.execute("UPDATE Events SET Selected = 0 WHERE Event_id = ?"(ID)) # updates Selected in db
+            conn.commit() # saves db
+            print(self.get_ststus(ID)) # for testing
             print()
-            self.btns[ID].config(bg="light grey")
+            self.btns[ID].config(bg="light grey") # updates btn colour
 
     def create_btn(self, ID, filter):
         if filter == "all":
