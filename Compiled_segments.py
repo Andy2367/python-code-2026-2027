@@ -70,7 +70,7 @@ class event:
         if status == 0:
             print()
             print(self.get_ststus(ID))
-            cur.execute(f"UPDATE Events SET Selected = 1 WHERE Event_id = {ID}")
+            cur.execute("UPDATE Events SET Selected = 1 WHERE Event_id = ?"(ID))
             conn.commit()
             print(self.get_ststus(ID))
             print()
@@ -78,14 +78,13 @@ class event:
         elif status == 1:
             print()
             print(self.get_ststus(ID))
-            cur.execute(f"UPDATE Events SET Selected = 0 WHERE Event_id = {ID}")
+            cur.execute("UPDATE Events SET Selected = 0 WHERE Event_id = ?"(ID))
             conn.commit()
             print(self.get_ststus(ID))
             print()
             self.btns[ID].config(bg="light grey")
 
     def create_btn(self, ID, filter):
-
         if filter == "all":
             conn = sqlite3.connect("IA_database.db")
             cur = conn.cursor()
