@@ -57,7 +57,7 @@ class event:
         conn = sqlite3.connect("IA_database.db")
         cur = conn.cursor()
 
-        cur.execute(f"SELECT Selected FROM Events WHERE Event_id IS {ID}")
+        cur.execute("SELECT Selected FROM Events WHERE Event_id IS ?"(ID))
         status = cur.fetchone()
         status = int(status[0])
         return status
@@ -89,29 +89,29 @@ class event:
         if filter == "all":
             conn = sqlite3.connect("IA_database.db")
             cur = conn.cursor()
-            cur.execute(f"SELECT Event_name FROM Events WHERE Event_id = {ID}")
+            cur.execute("SELECT Event_name FROM Events WHERE Event_id = ?"(ID)
             name = cur.fetchone()
             name = name[0]
 
-            cur.execute(f"SELECT Event_type FROM Events WHERE Event_id = {ID}")
+            cur.execute("SELECT Event_type FROM Events WHERE Event_id = ?"(ID)
             e_type = cur.fetchone()
             e_type = e_type[0]
 
-            cur.execute(f"SELECT Location FROM Events WHERE Event_id = {ID}")
+            cur.execute("SELECT Location FROM Events WHERE Event_id = ?"(ID)
             loc = cur.fetchone()
             loc = loc[0]
 
-            cur.execute(f"SELECT Time FROM Events WHERE Event_id = {ID}")
+            cur.execute("SELECT Time FROM Events WHERE Event_id = ?"(ID))
             time = cur. fetchone()
             time = time[0]
 
-            cur.execute(f"SELECT More_info FROM Events WHERE Event_id = {ID}")
+            cur.execute("SELECT More_info FROM Events WHERE Event_id = ?"(ID)
             info = cur.fetchone()
             info = info[0]
 
             status = self.get_ststus(ID)
 
-            cur.execute(f"SELECT  Date FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT  Date FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             date = cur.fetchone()           
 
             if status == 0:
@@ -125,29 +125,29 @@ class event:
 
 
         elif filter == "selected":
-            cur.execute(f"SELECT Event_name FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT Event_name FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             name = cur.fetchone()
             name = name[0]
 
-            cur.execute(f"SELECT Event_type FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT Event_type FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             e_type = cur.fetchone()
             e_type = e_type[0]
 
-            cur.execute(f"SELECT Location FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT Location FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             loc = cur.fetchone()
             loc = loc[0]
 
-            cur.execute(f"SELECT Time FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT Time FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             time = cur. fetchone()
             time = time[0]
 
-            cur.execute(f"SELECT More_info FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT More_info FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             info = cur.fetchone()
             info = info[0]
 
             status = self.get_ststus(ID)
 
-            cur.execute(f"SELECT  Date FROM Events WHERE Event_id = {ID} AND Selected = 1")
+            cur.execute("SELECT  Date FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
             date = cur.fetchone()
 
             if status == 0:
@@ -159,29 +159,29 @@ class event:
             elif filter == "not_selected":
                 conn = sqlite3.connect("IA_database.db")
                 cur = conn.cursor()
-                cur.execute(f"SELECT Event_name FROM Events WHERE Event_id = {ID} AND Selected = 0")
+                cur.execute("SELECT Event_name FROM Events WHERE Event_id = ? AND Selected = 0"(ID))
                 name = cur.fetchone()
                 name = name[0]
 
-                cur.execute(f"SELECT Event_type FROM Events WHERE Event_id = {ID} AND Selected = 0")
+                cur.execute("SELECT Event_type FROM Events WHERE Event_id = ? AND Selected = 0"(ID))
                 e_type = cur.fetchone()
                 e_type = e_type[0]
 
-                cur.execute(f"SELECT Location FROM Events WHERE Event_id = {ID} AND Selected = 0")
+                cur.execute("SELECT Location FROM Events WHERE Event_id = ? AND Selected = 0"(ID))
                 loc = cur.fetchone()
                 loc = loc[0]
 
-                cur.execute(f"SELECT Time FROM Events WHERE Event_id = {ID} AND Selected = 0")
+                cur.execute("SELECT Time FROM Events WHERE Event_id = ? AND Selected = 0"(ID))
                 time = cur. fetchone()
                 time = time[0]
 
-                cur.execute(f"SELECT More_info FROM Events WHERE Event_id = {ID} AND Selected = 0")
+                cur.execute("SELECT More_info FROM Events WHERE Event_id = ? AND Selected = 0"(ID))
                 info = cur.fetchone()
                 info = info[0]
 
                 status = self.get_ststus(ID)
 
-                cur.execute(f"SELECT  Date FROM Events WHERE Event_id = {ID} AND Selected = 1")
+                cur.execute("SELECT  Date FROM Events WHERE Event_id = ? AND Selected = 1"(ID))
                 date = cur.fetchone()
 
                 if status == 0:
@@ -210,7 +210,7 @@ class event:
         EM = ET[-1]
         time_till_h = (EH - AH)
         Time = self.get_time(ID)
-        cur.execute(f"SELECT Event_name FROM Events WHERE Event_id = {ID}")
+        cur.execute("SELECT Event_name FROM Events WHERE Event_id = ?"(ID))
         name = cur.fetchone()
         name = name[0]
         till_m = (EM - AM)
@@ -254,7 +254,7 @@ cur.execute(c1) # creates Events table
 cur.execute(c2) # creates Locations table
 cur.execute(c3) #creates Event type table
 
-conn.commit() # saves changes to the db (should be added alfter evry block of executes for redundency)
+conn.commit() # saves changes to the db (should be added after every block of executes for redundancy)
 
 cur.execute("SELECT COUNT (*) FROM Events")
 num_events = cur.fetchone()
